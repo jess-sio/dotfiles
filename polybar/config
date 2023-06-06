@@ -1,0 +1,164 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[global/wm]
+include-file = $HOME/.config/polybar/mocha.ini
+margin-top = 0
+margin-bottom = 0
+
+[fonts]
+notoreg = NotoSans Nerd Font:Regular:size=8
+notosemibold = NotoSans Nerd Font:SemiBold:size=8
+notobold = NotoSans Nerd Font:Bold:size=8
+notoboldhigh = NotoSans Nerd Font:Bold:size=11
+notoital = NotoSans Nerd Font:Italic:size=9
+nerd = FiraCode Nerd Font:size=12;0
+
+[bar/i3]
+enable-ipc = true
+override-redirect = false
+dpi-x = 300
+dpi-y = 300
+
+bottom = false
+width = 100%
+height = 70
+
+background = ${colors.base}
+foreground = ${colors.surface}
+
+line-color = ${colors.surface}
+line-size = 2
+
+separator = "   "
+
+;List of fonts
+font-0 = ${fonts.notoreg}
+font-1 = ${fonts.notosemibold}
+font-2 = ${fonts.notobold}
+font-3 = ${fonts.notoital}
+font-5 = ${fonts.nerd}
+font-6 = ${fonts.notoboldhigh}
+
+wm-restack = i3
+tray-position = right
+
+modules-left = workspaces
+modules-center = date
+modules-right = xkbstates sound
+
+
+;Date correction
+[module/date]
+type = internal/date
+
+time = %H:%M
+date = %A, %B %d
+date-alt = %A, %B %d, %Y
+time-alt = %H:%M:%S
+
+format-prefix = " "
+format-padding = 2
+format-underline = ${colors.yellow}
+format-foreground = ${colors.yellow}
+interval = 20
+
+label = %date%, %time%
+label-font = 2
+label-foreground = ${colors.text}
+
+
+;Workspaces
+[module/workspaces]
+type = internal/i3
+
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+
+format = <label-state> <label-mode>
+
+label-dimmed-underline = ${colors.base}
+
+;On editing mode (resize for ex)
+label-mode = %mode%
+label-mode-background = ${colors.surface}
+label-mode-underline = ${colors.mauve}
+label-mode-padding = 2
+label-mode-font = 3
+
+label-focused = %index%
+label-focused-background = ${colors.surface}
+label-focused-underline = ${colors.green}
+label-focused-padding = 3
+label-focused-font = 3
+
+label-unfocused = %index%
+label-unfocused-foreground = ${colors.text}
+label-unfocused-padding = 3
+label-unfocused-font = 3
+
+label-visible = %index%
+label-visible-background = ${colors.surface}
+label-visible-underline = ${colors.mauve}
+label-visible-padding = 3
+label-visible-font = 3
+
+label-urgent = %index%
+label-urgent-background = ${colors.maroon}
+label-urgent-underline = ${colors.red}
+label-urgent-padding = 3
+label-urgent-font = 3
+
+;Sound
+[module/sound]
+type = internal/alsa
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 2
+format-volume-underline = ${colors.sky}
+
+label-volume = %percentage%
+label-volume-font = 3
+
+label-muted =  (%percentage%)
+label-muted-font = 3
+label-muted-padding = 2
+label-muted-foreground = ${colors.sapphire}
+label-muted-underline = ${colors.sapphire}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-font = 7
+ramp-volume-foreground = ${colors.sky}
+
+;Keyboard lock states by xkeyboard
+[module/xkbstates]
+type = internal/xkeyboard
+format = <label-indicator>
+
+format-underline = ${colors.green}
+format-padding = 2
+
+label-indicator-on-capslock = "%{F#9399b2} "
+label-indicator-off-capslock = "%{F#313244} "
+label-indicator-on-numlock = "%{F#9399b2} "
+label-indicator-off-numlock = "%{F#313244} "
+label-indicator-on-scrolllock = "%{F#9399b2}"
+label-indicator-off-scrolllock = "%{F#313244}"
