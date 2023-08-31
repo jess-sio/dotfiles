@@ -26,4 +26,4 @@
 
 --wrap=never
 --style=auto
---theme="Coldark-Dark"
+--theme="Catppuccin-mocha"
