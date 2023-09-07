@@ -2,13 +2,18 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		opts = {
+			autoformat = false,
+		},
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			"j-hui/fidget.nvim",
+			{ "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach" },
 			"folke/neodev.nvim",
 			"RRethy/vim-illuminate",
 			"hrsh7th/cmp-nvim-lsp",
+			"nvim-lua/plenary.nvim",
+			"joechrisellis/lsp-format-modifications.nvim",
 		},
 		config = function()
 			-- Set up Mason before anything else
@@ -82,7 +87,8 @@ return {
 				lsp_map("<leader>lr", vim.lsp.buf.rename, bufnr, "LSP: Rename symbol")
 				lsp_map("<leader>la", vim.lsp.buf.code_action, bufnr, "LSP: Code action")
 				lsp_map("<leader>ld", vim.lsp.buf.type_definition, bufnr, "LSP: Type definition")
-				lsp_map("<leader>ls", require("telescope.builtin").lsp_document_symbols, bufnr, "LSP: Document symbols")
+				lsp_map("<leader>ls", require("telescope.builtin").lsp_document_symbols, bufnr,
+					"LSP: Document symbols")
 
 				lsp_map("gd", vim.lsp.buf.definition, bufnr, "LSP: Goto Definition")
 				lsp_map("gr", require("telescope.builtin").lsp_references, bufnr, "LSP: Goto References")
@@ -97,7 +103,16 @@ return {
 					desc = "Format current buffer with LSP",
 				})
 
+				vim.api.nvim_buf_create_user_command(bufnr, "FormatDiff", function(_)
+					local lsp_format_modifications = require "lsp-format-modifications"
+					lsp_format_modifications.format_modifications(client, bufnr)
+				end, {
+					desc = "Format current buffer with LSP, but only the diff",
+				}
+				)
+
 				lsp_map("<leader>ff", "<cmd>Format<cr>", bufnr, "Format")
+				lsp_map("<leader>fd", "<cmd>FormatDiff<cr>", bufnr, "FormatDiff")
 
 				-- Attach and configure vim-illuminate
 				require("illuminate").on_attach(client)

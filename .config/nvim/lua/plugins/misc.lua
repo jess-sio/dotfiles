@@ -25,16 +25,6 @@ return {
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	"tpope/vim-surround", -- Surround stuff with the ys-, cs-, ds- commands
 	{
-		"akinsho/bufferline.nvim",
-		version = "v3.*",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		opts = {},
-		config = function()
-			vim.opt.termguicolors = true
-			require("bufferline").setup()
-		end,
-	},
-	{
 		-- Show symbols in the current file
 		"simrat39/symbols-outline.nvim",
 		config = function()

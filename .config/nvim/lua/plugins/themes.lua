@@ -21,4 +21,5 @@ return {
 	"sainnhe/everforest",
 	"savq/melange-nvim", -- Overall tweaks
 	"norcalli/nvim-colorizer.lua",
+	"norcalli/nvim-base16.lua",
 }
