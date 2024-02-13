@@ -20,12 +20,4 @@ return {
 			})
 		end,
 	},
-	{
-		"tpope/vim-fugitive",
-		config = function()
-			local map = require("helpers.keys").map
-			map("n", "<leader>ga", "<cmd>Git add %<cr>", "Git: Stage the current file")
-			map("n", "<leader>gb", "<cmd>Git blame<cr>", "Git: Show the blame")
-		end,
-	},
 }

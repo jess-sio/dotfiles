@@ -10,7 +10,6 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-context",
-			"HiPhish/nvim-ts-rainbow2",
 		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -18,8 +17,6 @@ return {
 				ensure_installed = {
 					"c",
 					"cpp",
-					"go",
-					"lua",
 					"python",
 					"rust",
 					"vim",
@@ -34,7 +31,6 @@ return {
 					"gitattributes",
 					"gitcommit",
 					"gitignore",
-					"graphql",
 					"html",
 					"ini",
 					"java",
@@ -49,20 +45,18 @@ return {
 					"toml",
 					"tsx",
 					"typescript",
-					"wgsl",
-					"wgsl_bevy",
 					"yaml",
 				},
 
 				highlight = {
-					enable = true,
+					enable = false,
 				},
 				indent = {
-					enable = true,
+					enable = false,
 					disable = { "python" },
 				},
 				incremental_selection = {
-					enable = true,
+					enable = false,
 					keymaps = {
 						init_selection = "<c-space>",
 						node_incremental = "<c-space>",
@@ -104,10 +98,6 @@ return {
 							["[]"] = "@class.outer",
 						},
 					},
-				},
-				rainbow = {
-					enable = true,
-					query = "rainbow-parens",
 				},
 			})
 		end,
